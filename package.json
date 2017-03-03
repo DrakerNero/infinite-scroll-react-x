@@ -2,7 +2,11 @@
   "name": "infinite-scroll-react-x",
   "version": "0.0.0-development",
   "description": "infinite scroll react X",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "files": [
+    "src",
+    "lib"
+  ],
   "scripts": {
     "tester": "mocha test --compilers js:babel-register --watch",
     "test": "mocha test --compilers js:babel-register",
