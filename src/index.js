@@ -5,16 +5,29 @@ const scrollY = window.scrollY
 const innerHeight = window.innerHeight
 
 class InFiniteScrollReactX extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      timeOut: 1,
+    }
+  }
+
   static propTypes = {
-    selectId: PropTypes.string
+    selectId: PropTypes.string,
+    offsetHeight: PropTypes.number,
+    delay: PropTypes.number,
+    onScrollAction: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
     selectId: '',
+    offsetHeight: 100,
+    delay: 3,
   }
 
   componentDidMount = () => {
-    const { selectId } = this.props
+    const { selectId, offsetHeight } = this.props
     const { windowScroll, positionScroll } = this
 
     if (_.isEmpty(selectId)) {
@@ -24,56 +37,64 @@ class InFiniteScrollReactX extends Component {
     }
   }
 
+  hasTimeState = (timeOut) => {
+    this.setState({
+      timeOut,
+    })
+  }
+  
   windowScroll = () => {
+    const { offsetHeight } = this.props
+    const { onfuncScroll } = this
+
     window.addEventListener('scroll', () => {
-      console.log('No')
+      const scroll = window.scrollY
       const height = document.body.clientHeight
-      const height8 = window.scrollY
-      const height10 = document.getElementById('main').clientHeight
-      const maxScrollHeight = (height - innerHeight) + 16 // ใช้ตัวนี้
-      console.log(document.body.clientHeight, document.getElementById('main').clientHeight)
-      console.log('result', maxScrollHeight)
+      const maxHeight = height + 16
+      const onScroll = scroll + innerHeight
+      if ((onScroll + offsetHeight) >= maxHeight) {
+        onfuncScroll()
+      }
+
     })
   }
 
   positionScroll = () => {
-    const { selectId } = this.props
+    const { selectId, offsetHeight } = this.props
+    const { onfuncScroll } = this
+    const element = document.getElementById(selectId)
+
     document.getElementById(selectId).addEventListener('scroll', () => {
-      console.log('Yes')
-      const height = document.getElementById(selectId).clientHeight
-      console.log(height)
-      const height8 = window.scrollY
-      const clientHeight = document.getElementById('main').clientHeight
-      const maxScrollHeight = (clientHeight - innerHeight) + 16 // ใช้ตัวนี้
-      console.log(document.body.clientHeight, document.getElementById('main').clientHeight)
-      console.log('result', maxScrollHeight)
-      
+      const maxHeight = element.scrollHeight
+      const clientHeight = element.clientHeight
+      const onScroll = element.scrollTop + element.clientHeight
+
+
+      if ((onScroll + offsetHeight) >= maxHeight) {
+        onfuncScroll()
+      }
+
     })
   }
 
+  onfuncScroll = () => {
+    const { timeOut } = this.state
+    const { delay, onScrollAction } = this.props
+    if (this.state.timeOut > 0) {
+      this.hasTimeState(0)
+
+      onScrollAction()
+
+      setTimeout((e) => {
+        this.hasTimeState(1)
+      }, (delay * 1000))
+    }
+  }
+
   render() {
-    // const { selectId } = this.props
-    // const { windowScroll, positionScroll } = this
-
-    // if (_.isEmpty(selectId)) {
-    //   windowScroll()
-    // } else {
-    //   positionScroll()
-    // }
-
-    // window.addEventListener('scroll', (e) => {
-    //   let height = null
-    //   // console.log(height)
-    //   // const height8 = window.scrollY
-    //   // const height9 = window.innerHeight
-    //   // const height10 = document.getElementById('main').clientHeight
-    //   // const maxScrollHeight = (height10 - height9) + 16 // ใช้ตัวนี้
-    //   // console.log(document.body.clientHeight, document.getElementById('main').clientHeight)
-    // })
-
     return (
       <div>
-        hello
+        { /* Infinite scroll react x */ }
       </div>
     );
   }
