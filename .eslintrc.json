@@ -8,6 +8,7 @@
     "rules": {
         "semi": 0,
         "import/no-extraneous-dependencies": 0,
-        "react/jsx-filename-extension": 0
+        "react/jsx-filename-extension": 0,
+        "no-undef": 0
     }
 }

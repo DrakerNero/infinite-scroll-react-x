@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'lodash'
-
+import { isEmpty } from './helper'
 const scrollY = window.scrollY
 const innerHeight = window.innerHeight
 
@@ -30,7 +29,7 @@ class InFiniteScrollReactX extends Component {
     const { selectId, offsetHeight } = this.props
     const { windowScroll, positionScroll } = this
 
-    if (_.isEmpty(selectId)) {
+    if (isEmpty(selectId)) {
       windowScroll()
     } else {
       positionScroll()

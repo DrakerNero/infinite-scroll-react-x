@@ -5,7 +5,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <div 
+        <div
           id="main"
           style={{
             height: '500px',
@@ -16,12 +16,14 @@ class App extends Component {
             f
           </div>
         </div>
-        <div style={{
-          height: '2100px',
-        }}>
+        <div
+          style={{
+            height: '2100px',
+          }}
+        >
           f
         </div>
-        <InFiniteScrollReactX />
+        <InFiniteScrollReactX selectId="main" onScrollAction={() => console.log('start action')} />
       </div>
     );
   }

@@ -4,6 +4,7 @@
   "description": "infinite scroll react X",
   "main": "src/index.js",
   "scripts": {
+    "tester": "mocha test --compilers js:babel-register --watch",
     "test": "mocha test --compilers js:babel-register",
     "build": "babel --copy-files --out-dir dist --ignore *.spec.js src",
     "dev": "cross-env NODE_ENV=development node devServer.js",
@@ -35,6 +36,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.23.0",
+    "chai": "^3.5.0",
     "commitizen": "^2.9.6",
     "cross-env": "^3.1.4",
     "eslint": "^3.16.1",
@@ -46,6 +48,7 @@
     "express": "^4.14.1",
     "husky": "^0.13.1",
     "lodash": "^4.17.4",
+    "mocha": "^3.2.0",
     "path": "^0.12.7",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
